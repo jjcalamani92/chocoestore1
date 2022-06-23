@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import { useContext } from "react";
-import { HomeHardware, Layout } from "../components/Layout";
+import { Home, Layout } from "../components/Layout";
 import { UiContext } from "../src/context";
 
 const Index: NextPage = () => {
@@ -11,7 +11,7 @@ const Index: NextPage = () => {
 			pageDescription={site.description}
 			imageFullUrl={site.logo}
 		>
-			<HomeHardware />
+			<Home />
 		</Layout>
 	);
 };

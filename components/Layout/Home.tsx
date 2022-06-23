@@ -1,4 +1,4 @@
-export const HomeHardware = () => {
+export const Home = () => {
 	return (
 		<section className="relative bg-white">
 			<img

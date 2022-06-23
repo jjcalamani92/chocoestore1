@@ -1,4 +1,4 @@
-export * from './HomeHardware'
+export * from './Home'
 export * from './Layout'
 export * from './LayoutAdmin'
 export * from './LayoutError'
