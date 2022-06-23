@@ -131,7 +131,7 @@ export const FormSection: FC<Props> = ({ section, category }) => {
                     </div>
 
                     <div className="col-span-1">
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Imagen de Sección</label>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Imagen de la Sección</label>
                       <div className="grid grid-cols-2 gap-2">
                         <div className="flex justify-center px-6 pt-5 border-2 border-gray-300 border-dashed rounded-md">
                           <div className="space-y-1 text-center">
