@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faCircleMinus } from '@fortawesome/free-solid-svg-icons';
 import axios from "axios";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 interface Props {
 	products: IHardware[];
@@ -95,11 +96,16 @@ export const LayoutItemListAdmin: FC<Props> = ({ products }) => {
 						{products.map((product, i) => (
 							<div key={i} className="group">
 								<div className="w-full min-h-80 bg-white aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none relative ">
-									<img
-										src={product.image[0]}
-										alt={product.name}
-										className="w-full h-full object-contain"
-									/>
+								<Image
+									src={product.image[0]}
+									alt={product.name}
+
+									width={500}
+									height={500}
+									layout="responsive"
+									objectFit="contain"
+								/>
+									
 									<div className="flex justify-end absolute right-1 bottom-1 bg-white rounded pt-1">
 										<Link href={`/admin/products/${product.slug}`} >
 											<a>

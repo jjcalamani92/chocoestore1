@@ -1,4 +1,4 @@
-export * from './Table02'
+export * from './TableProduct'
 export * from './TableCategory'
 export * from './TableFeatured'
 export * from './TableItem'

@@ -27,6 +27,7 @@ interface Props {
 }
 
 export const FormSite: FC<Props> = ({ site }) => {
+  console.log(site.description)
   const router = useRouter()
   const { register, handleSubmit, formState: { errors }, getValues, setValue, watch } = useForm<FormData>({
     defaultValues: site
@@ -115,7 +116,7 @@ export const FormSite: FC<Props> = ({ site }) => {
                           {errors.address && <span className="text-sm text-orange-500">{errors.address.message}</span>}
                         </div>
                       </div>
-                      <div className="grid grid-cols-2 gap-3">
+                      <div className="grid grid-cols-1 gap 0 lg:grid-cols-2 lg:gap-3">
                         <div className="">
                           <label htmlFor="domain" className="block text-sm font-medium text-gray-700">
                             Dominio

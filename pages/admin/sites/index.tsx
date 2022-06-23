@@ -24,7 +24,6 @@ const AdminPages:FC<Props> = ({seo, site}) => {
 				<FormSite site={site} />
 			</LayoutAdmin>
 		</>
-
 	);
 };
 

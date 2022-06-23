@@ -74,6 +74,7 @@ export const S = gql`
 			domain
 			logo
 			numberPhone
+			description
 			address
 			type
 			categories {
