@@ -3,10 +3,9 @@ export const HomeHardware = () => {
 		<section className="relative bg-white">
 			<img
 				className="absolute inset-0 object-[75%] sm:object-[25%] object-cover w-full h-full opacity-25 sm:opacity-100"
-				src="https://res.cloudinary.com/dvcyhn0lj/image/upload/v1655901189/DK6T2FQYNBEE5FWRP5MC4S35JE_j3onvu.jpg"
+				src="https://res.cloudinary.com/dvcyhn0lj/image/upload/v1655004538/Ferreteria/category/1200px-Hand_tools_smghhr.jpg"
 				alt="Couple on a bed with a dog"
 			/>
-
 			<div className="hidden sm:block sm:inset-0 sm:absolute sm:bg-gradient-to-r sm:from-white sm:to-transparent"></div>
 
 			<div className="relative max-w-screen-xl px-4 py-32 mx-auto lg:h-screen lg:items-center lg:flex">
