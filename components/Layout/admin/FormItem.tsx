@@ -76,7 +76,7 @@ export const FormItem: FC<Props> = ({ item, category, section }) => {
                     <div className="col-span-2">
                       <div>
                         <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-                          Nombre de la Item
+                          Nombre del Item
                         </label>
                         <input
                           className="my-2 focus:ring-orange-500 focus:border-orange-500 block w-full shadow-sm sm:text-sm  rounded-md p-1 border border-gray-300"
@@ -113,7 +113,7 @@ export const FormItem: FC<Props> = ({ item, category, section }) => {
 
                       <div>
                         <label htmlFor="description" className="block text-sm font-medium text-gray-700">
-                          Descripción de la Item
+                          Descripción del Item
                         </label>
                         <div className="mt-1">
                           <textarea
@@ -133,7 +133,7 @@ export const FormItem: FC<Props> = ({ item, category, section }) => {
                     </div>
 
                     <div className="col-span-1">
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Imagen de Item</label>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Imagen del Item</label>
                       <div className="grid grid-cols-2 gap-2">
                         <div className="flex justify-center px-6 pt-5 border-2 border-gray-300 border-dashed rounded-md">
                           <div className="space-y-1 text-center">
