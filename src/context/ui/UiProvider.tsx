@@ -24,48 +24,8 @@ const UI_INITIAL_STATE: UiState = {
 		address: "av fatima",
 		description: "av fatima",
 		type: "ecommerce",
-		categories: [
-			{
-				_id: 'men',
-				name: 'ferreteria',
-				imageSrc:"https://tailwindui.com/img/ecommerce-images/mega-menu-category-01.jpg",
-				featured: [
-					{
-						_id:"2",
-						name: 'New Arrivals',
-						href: '#',
-						description: 'ropa para mujer',
-						imageSrc: 'https://tailwindui.com/img/ecommerce-images/mega-menu-category-01.jpg',
-						imageAlt: 'Models sitting back to back, wearing Basic Tee in black and bone.',
-					},
-					
-				],
-				sections: [
-					{
-						_id: 'clothing',
-						name: 'Clothing',
-						href: '#',
-						description: 'ropa para mujer',
-						imageSrc: 'https://tailwindui.com/img/ecommerce-images/mega-menu-category-01.jpg',
-						imageAlt: 'Models sitting back to back, wearing Basic Tee in black and bone.',
-						items: [
-							{ 
-								_id: '3',
-								name: 'Tops', 
-								href: '#',
-								description: 'ropa para mujer',
-								imageSrc: 'https://tailwindui.com/img/ecommerce-images/mega-menu-category-01.jpg',
-								imageAlt: 'Models sitting back to back, wearing Basic Tee in black and bone.',
-							}
-						],
-					},
-					
-				],
-			},
-		],
-		pages: [
-			{ _id: '2', name: 'linea automotiva', href: '/' },
-		],
+		categories: [],
+		pages: [],
 	}
 };
 
