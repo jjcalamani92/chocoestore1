@@ -19,10 +19,7 @@ const AdminPages:FC<Props> = ({seo, site}) => {
 	return (
 		<>
 			<LayoutAdmin>
-				<div className="my-6 container px-2 mx-auto flex flex-row lg:flex-row items-center lg:items-center justify-between ">
-					<h4 className="text-2xl font-bold leading-tight text-gray-800">Sitio</h4>
-				</div>
-				<FormSite site={site} />
+				
         <div className="my-6 container px-2 mx-auto flex flex-row lg:flex-row items-center lg:items-center justify-between ">
 					<h4 className="text-2xl font-bold leading-tight text-gray-800">Categorias</h4>
 					<Link href="/admin/sites/new">
@@ -31,6 +28,10 @@ const AdminPages:FC<Props> = ({seo, site}) => {
 				</div>
 				<TableCategory categories={site.categories} />
 				<LayoutSiteListAdmin data={site.categories}/>
+				<div className="my-6 container px-2 mx-auto flex flex-row lg:flex-row items-center lg:items-center justify-between ">
+					<h4 className="text-2xl font-bold leading-tight text-gray-800">Sitio</h4>
+				</div>
+				<FormSite site={site} />
 			</LayoutAdmin>
 		</>
 

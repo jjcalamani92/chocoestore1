@@ -19,25 +19,29 @@ export const TableSection: FC<Props> = ({ sections, category }) => {
   const [show, setShow] = useState(null);
 
   const onDeleteData = async (id: string) => {
-    const data = {section: id, category: category }
+    const data = { section: id, category: category }
     await axios.put(`${process.env.APIS_URL}/api/site/removesection/${process.env.API_SITE}`, data)
     router.reload()
   }
   return (
     <>
-      <div className="hidden lg:flex">
-        <div className="w-full">
-
-          <div className="bg-white ">
-            
-            <div className="overflow-x-auto ">
+      <div className="bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-2xl mx-auto py-2 sm:py-2 lg:py-2 lg:max-w-none">
+          <div className="my-6 container mx-auto flex flex-row lg:flex-row items-center lg:items-center justify-between ">
+            <h4 className="text-2xl font-bold leading-tight text-gray-800">Secciones</h4>
+						<Link href={`/admin/sites/${router.query.category}/new`}>
+							<a className="transition duration-150 ease-in-out hover:bg-orange-500 focus:outline-none border bg-orange-600 rounded text-white px-8 py-2 text-sm">Nueva Sección</a>
+						</Link>
+            </div>
+          <div className="overflow-x-auto hidden lg:flex">
               <table className="table-auto  whitespace-nowrap w-full">
                 <thead>
                   <tr className="h-16 border border-gray-100 rounded">
                     <th className="w-3/10" >
                       <div className="flex items-center pl-5">
                         <p className="text-base font-medium leading-none text-gray-900 mr-2">
-                          Nombre de la Categoría
+                          Nombre de la Sección
                         </p>
                       </div>
                     </th>
@@ -48,7 +52,7 @@ export const TableSection: FC<Props> = ({ sections, category }) => {
                         </p>
                       </div>
                     </th>
-                    
+
                     <th className="w-1/10" >
                       <div className="flex items-center pl-5">
                         <p className="text-base font-medium leading-none text-gray-900 mr-2">
@@ -90,7 +94,7 @@ export const TableSection: FC<Props> = ({ sections, category }) => {
                           </p>
                         </div>
                       </td>
-                      
+
                       <td className="pl-5">
                         <div className="flex items-center">
                           <div className="aspect-w-1 h-30 aspect-h-1 rounded-lg bg-white overflow-hidden group-hover:opacity-75">
@@ -107,7 +111,7 @@ export const TableSection: FC<Props> = ({ sections, category }) => {
                       <td className="pl-5">
                         <div className="flex items-center">
                           <p className="text-sm leading-none text-gray-600 ml-2">
-                          {section.imageAlt}
+                            {section.imageAlt}
                           </p>
                         </div>
                       </td>
@@ -121,23 +125,23 @@ export const TableSection: FC<Props> = ({ sections, category }) => {
                       <td className="pl-4">
                         <div className="flex items-center gap-2">
                           <Link href={`/admin/sites/${router.query.category}/${section.href}`} >
-                          <a>
-                            <FontAwesomeIcon
-                              className="text-sm leading-none mx-1 text-gray-600 hover:text-gray-900 rounded focus:outline-none h-5 w-5"
-                              icon={faPenToSquare}
-                            />
+                            <a>
+                              <FontAwesomeIcon
+                                className="text-sm leading-none mx-1 text-gray-600 hover:text-gray-900 rounded focus:outline-none h-5 w-5"
+                                icon={faPenToSquare}
+                              />
                             </a>
                           </Link>
                           <div onClick={() => onDeleteData(section._id)} >
-                          <a>
-                            <FontAwesomeIcon
-                              className="text-sm leading-none mx-1 text-gray-600 hover:text-gray-900 rounded focus:outline-none h-5 w-5"
-                              icon={faCircleMinus}
-                            />
-                          </a>
+                            <a>
+                              <FontAwesomeIcon
+                                className="text-sm leading-none mx-1 text-gray-600 hover:text-gray-900 rounded focus:outline-none h-5 w-5"
+                                icon={faCircleMinus}
+                              />
+                            </a>
                           </div>
                         </div>
-                        
+
 
                       </td>
                     </tr>
@@ -147,12 +151,8 @@ export const TableSection: FC<Props> = ({ sections, category }) => {
             </div>
           </div>
         </div>
-        <style>
-          {` .checkbox:checked + .check-icon {
-                display: flex;
-            }`}
-        </style>
       </div>
+      
     </>
   );
 };

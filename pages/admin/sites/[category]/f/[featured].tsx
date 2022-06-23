@@ -12,10 +12,6 @@ const ProductPage: NextPage<Props> = ({ featured, category }) => {
 	return (
 		<>
 			<LayoutAdmin>
-				<div className="my-6 container px-2 mx-auto flex flex-row lg:flex-row items-center lg:items-center justify-between ">
-					<h4 className="text-2xl font-bold leading-tight text-gray-800">Destacados</h4>
-					
-				</div>
 				<FormFeatured featured={featured} category={category}/>
 			</LayoutAdmin>
 		</>
