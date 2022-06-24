@@ -3,6 +3,7 @@ import { Dialog, Popover, Tab, Transition } from '@headlessui/react'
 import { FolderOpenIcon, LoginIcon, LogoutIcon, MenuIcon, SearchIcon, ShoppingBagIcon, XIcon } from '@heroicons/react/outline'
 import { UiContext, AuthContext } from '../../src/context';
 import Link from 'next/link';
+import Image from 'next/image';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
@@ -78,7 +79,14 @@ export const HeaderHardware = () => {
                           {category.featured.map((item) => (
                             <div key={item.name} className="group relative text-sm">
                               <div className="aspect-w-1 aspect-h-1 rounded-lg bg-gray-100 overflow-hidden group-hover:opacity-75">
-                                <img src={item.imageSrc} alt={item.imageAlt} className="object-center object-cover" />
+                                <Image
+                                  src={item.imageSrc}
+                                  alt={item.imageAlt}
+                                  height={200}
+                                  width={200}
+                                  objectFit={"cover"}
+                                  objectPosition={'center'}
+                                />
                               </div>
                               <a href={item.href} className="mt-6 block font-medium text-gray-900 capitalize">
                                 <span className="absolute z-10 inset-0" aria-hidden="true" />
@@ -140,39 +148,39 @@ export const HeaderHardware = () => {
                   )
                 }
 
-                
+
 
                 <div className="border-t border-gray-200 py-6 px-4 space-y-6">
-                  
+
                   {
-									isLoggedIn
-										?
-                    <div className="flow-root">
-                      <Link href='/' >
-                        <a className="-m-2 p-2 block font-medium text-gray-900  cursor-pointer"  onClick={logout}>
-                          Salir
-                        </a>
-                      </Link>
-                    </div>
-                      
-										:
-                    <>
+                    isLoggedIn
+                      ?
                       <div className="flow-root">
-                        <Link href={`/auth/login`}>
-                          <a className="-m-2 p-2 block font-medium text-gray-900">
-                            Login
+                        <Link href='/' >
+                          <a className="-m-2 p-2 block font-medium text-gray-900  cursor-pointer" onClick={logout}>
+                            Salir
                           </a>
                         </Link>
                       </div>
-                      <div className="flow-root">
-                        <Link href={`/auth/register`}>
-                          <a className="-m-2 p-2 block font-medium text-gray-900">
-                            Register
-                          </a>
-                        </Link>
-                      </div>
+
+                      :
+                      <>
+                        <div className="flow-root">
+                          <Link href={`/auth/login`}>
+                            <a className="-m-2 p-2 block font-medium text-gray-900">
+                              Login
+                            </a>
+                          </Link>
+                        </div>
+                        <div className="flow-root">
+                          <Link href={`/auth/register`}>
+                            <a className="-m-2 p-2 block font-medium text-gray-900">
+                              Register
+                            </a>
+                          </Link>
+                        </div>
                       </>
-								}
+                  }
                 </div>
 
                 {/* <div className="border-t border-gray-200 py-6 px-4">
@@ -214,9 +222,12 @@ export const HeaderHardware = () => {
                 <Link href="/">
                   <a >
                     <span className="sr-only">Workflow</span>
-                    <img
-                      className="h-8 w-auto"
+                    <Image
+                      // className="h-8 w-auto"
+                      width={150}
+                      height={50}
                       src={site.logo}
+                      objectFit={'cover'}
                       alt=""
                     />
                   </a>
@@ -263,10 +274,13 @@ export const HeaderHardware = () => {
                                       {category.featured.map((item, i) => (
                                         <div key={i} className="group relative text-base sm:text-sm">
                                           <div className="aspect-w-1 aspect-h-1 rounded-lg bg-gray-100 overflow-hidden group-hover:opacity-75">
-                                            <img
+                                            <Image
                                               src={item.imageSrc}
                                               alt={item.imageAlt}
-                                              className="object-center object-cover"
+                                              width='200'
+                                              height='200'
+                                              objectFit={"cover"}
+                                              objectPosition={'center'}
                                             />
                                           </div>
                                           <a href={item.href} className="mt-6 block font-medium text-gray-900 capitalize">
@@ -352,24 +366,24 @@ export const HeaderHardware = () => {
                     <span className="sr-only">, change currency</span>
                   </a>
                 </div> */}
-								{
-									isLoggedIn
-										?
-										<>
-										{
-									user?.role === 'ADMIN_ROL' && (
+                {
+                  isLoggedIn
+                    ?
+                    <>
+                      {
+                        user?.role === 'ADMIN_ROL' && (
 
-										<Link href="/admin">
-												<a className="lg:flex lg:ml-3 hidden">
-                        <div className="p-2 text-gray-400 hover:text-gray-500 flex">
-                          <span className="sr-only">Admin</span>
-                          <FolderOpenIcon className="w-6 h-6" aria-hidden="true" />
-                        </div>
-                      </a>
-										</Link>
-									)
-								}
-											<div className="lg:flex lg:ml-2 hidden" onClick={logout}>
+                          <Link href="/admin">
+                            <a className="lg:flex lg:ml-3 hidden">
+                              <div className="p-2 text-gray-400 hover:text-gray-500 flex">
+                                <span className="sr-only">Admin</span>
+                                <FolderOpenIcon className="w-6 h-6" aria-hidden="true" />
+                              </div>
+                            </a>
+                          </Link>
+                        )
+                      }
+                      <div className="lg:flex lg:ml-2 hidden" onClick={logout}>
                         <a className="p-2 text-gray-400 hover:text-gray-500 items-center flex">
                           <span className="sr-only">Logout</span>
                           <LogoutIcon
@@ -377,25 +391,25 @@ export const HeaderHardware = () => {
                             aria-hidden="true"
                           />
                         </a>
-										  </div>
-										</>
-										:
-										<Link href="/auth/login">
-													
-													<div className="lg:flex lg:ml-2 hidden">
-												<a className="p-2 text-gray-400 hover:text-gray-500 items-center flex">
-													<span className="sr-only">Login</span>
-													<LoginIcon
+                      </div>
+                    </>
+                    :
+                    <Link href="/auth/login">
+
+                      <div className="lg:flex lg:ml-2 hidden">
+                        <a className="p-2 text-gray-400 hover:text-gray-500 items-center flex">
+                          <span className="sr-only">Login</span>
+                          <LoginIcon
                             className="w-6 h-6"
                             aria-hidden="true"
                           />
-												</a>
-											</div>
-												</Link>
-										
-										
-								}
-                
+                        </a>
+                      </div>
+                    </Link>
+
+
+                }
+
 
                 {/* Search */}
                 <div className="flex lg:ml-3 items-center">

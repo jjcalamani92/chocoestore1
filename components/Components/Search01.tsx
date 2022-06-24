@@ -5,23 +5,25 @@ import { UiContext } from '../../src/context'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import { IHardware } from '../../src/interfaces'
+import Image from 'next/image'
 
 
 
 export const Search01 = () => {
   const { isSearchOpen, toggleSideSearch } = useContext(UiContext)
-  const [search, setSearch] = useState('') 
+  const [search, setSearch] = useState('')
 
-  const onSearch = (e:any) => {
+  const onSearch = (e: any) => {
     if (search.trim().length === 0) return;
     // console.log(e.target.value)  
     // setSearch(form.search)
     // console.log(form.search)
   }
 
+  useEffect(() => {
+    // const { hardwareAll } = await graphQLClientP.request(CATEGORY, { site: `${process.env.API_SITE}` })
+  }, []);
 
-  // console.log(setSearch)
-  // const [open, setOpen] = useState(false)
   return (
     <Transition.Root show={isSearchOpen} as={Fragment}>
       <Dialog as="div" className="relative z-50" onClose={toggleSideSearch}>
@@ -74,24 +76,24 @@ export const Search01 = () => {
                     <div className="block px-4 sm:px-6">
                       <Dialog.Title className="text-lg font-medium text-gray-900"> Buscar: </Dialog.Title>
                       <div
-                        className="flex mt-2 lg:ml-0 lg:mt-0 " 
-                        // onSubmit={handleSubmit(onSubmit)}
-                        >
+                        className="flex mt-2 lg:ml-0 lg:mt-0 "
+                      // onSubmit={handleSubmit(onSubmit)}
+                      >
 
                         <div className="pt-2 relative  w-full text-gray-600">
                           <input
                             value={search}
-                            onChange={(e) => setSearch( e.target.value )}
-                            onKeyPress={(e) => e.key === 'Enter' ? onSearch(e): null }
+                            onChange={(e) => setSearch(e.target.value)}
+                            onKeyPress={(e) => e.key === 'Enter' ? onSearch(e) : null}
                             // onChange={handleChange}
-                            
+
                             className="focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 bg-gray-100 h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none w-full" type="search"
                             placeholder="Buscar"
 
-                            // {...register('search', {
-                            //   required: 'Este campo es requerido para re  alizar busquedas',
-                            //   minLength: { value: 2, message: 'Mínimo 2 caracteres' }
-                            // })}
+                          // {...register('search', {
+                          //   required: 'Este campo es requerido para re  alizar busquedas',
+                          //   minLength: { value: 2, message: 'Mínimo 2 caracteres' }
+                          // })}
                           />
                           {/* <div>
                             {errors.search && <span className="text-sm text-orange-500">{errors.search.message}</span>}
@@ -114,50 +116,52 @@ export const Search01 = () => {
                         {/* <div className="h-full border-2 border-dashed border-gray-200" aria-hidden="true"> */}
                         <ul role="list" className="-my-6 divide-y divide-gray-200">
                           {[]
-                          //   .filter((form) => {
-                          //     if (search === '') {
-                          //       return form
-                          //     } else if (
-                          //       form.search.toLowercase().includes(search.toLowerCase()) {
-                          //       return form
-                          //     }
-                          //   )
-                          // })
-                          .map((product:IHardware, i:number) => (
-                          <li key={i} className="flex py-6">
-                            <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                              <img
-                                src={product.image[0]}
-                                alt={product.name}
-                                className="h-full w-full object-cover object-center"
-                              />
-                            </div>
-
-                            <div className="ml-4 flex flex-1 flex-col">
-                              <div>
-                                <div className="flex justify-between text-base font-medium text-gray-900">
-                                  <h3>
-                                    <a href='#'> {product.name} </a>
-                                  </h3>
-                                  <p className="ml-4">{product.price}.00 Bs</p>
+                            //   .filter((form) => {
+                            //     if (search === '') {
+                            //       return form
+                            //     } else if (
+                            //       form.search.toLowercase().includes(search.toLowerCase()) {
+                            //       return form
+                            //     }
+                            //   )
+                            // })
+                            .map((product: IHardware, i: number) => (
+                              <li key={i} className="flex py-6">
+                                <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                                  <Image
+                                    src={product.image[0]}
+                                    alt={product.name}
+                                    width='150'
+                                    height='150'
+                                    className="object-cover object-center"
+                                  />
                                 </div>
-                                <p className="mt-1 text-sm text-gray-500">{product.color}</p>
-                              </div>
-                              <div className="flex flex-1 items-end justify-between text-sm">
-                                {/* <p className="text-gray-500">Qty {product.quantity}</p> */}
 
-                                <div className="flex">
-                                  <button
-                                    type="button"
-                                    className="font-medium text-orange-600 hover:text-orange-500"
-                                  >
-                                    Ver Producto
-                                  </button>
+                                <div className="ml-4 flex flex-1 flex-col">
+                                  <div>
+                                    <div className="flex justify-between text-base font-medium text-gray-900">
+                                      <h3>
+                                        <a href='#'> {product.name} </a>
+                                      </h3>
+                                      <p className="ml-4">{product.price}.00 Bs</p>
+                                    </div>
+                                    <p className="mt-1 text-sm text-gray-500">{product.color}</p>
+                                  </div>
+                                  <div className="flex flex-1 items-end justify-between text-sm">
+                                    {/* <p className="text-gray-500">Qty {product.quantity}</p> */}
+
+                                    <div className="flex">
+                                      <button
+                                        type="button"
+                                        className="font-medium text-orange-600 hover:text-orange-500"
+                                      >
+                                        Ver Producto
+                                      </button>
+                                    </div>
+                                  </div>
                                 </div>
-                              </div>
-                            </div>
-                          </li>
-                          ))}
+                              </li>
+                            ))}
                         </ul>
                         {/* </div> */}
                       </div>

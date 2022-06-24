@@ -25,6 +25,8 @@ export const Layout: FC<Props> = ({
 				<meta property="og:description" content={pageDescription} />
 				<meta property="og:type" content="og:product" />
 				{imageFullUrl && <meta property="og:image" content={imageFullUrl} />}
+				<meta property="product:price:currency" content="USD" />
+				<meta property="product:price:amount" content="25" />
 			</Head>
 			{/* <HeaderWear /> */}
 			<HeaderHardware />
