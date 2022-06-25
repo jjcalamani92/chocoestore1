@@ -82,7 +82,6 @@ export const HeadingPrimary:FC<HeadingPrimary> = ({category, section, name, seo,
     role="list"
     className="max-w-2xl mx-auto px-4 flex items-center space-x-0 sm:px-0 lg:max-w-7xl lg:px-8 "
   >
-   
     {
       seo.category?.name
       ?

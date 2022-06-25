@@ -45,7 +45,6 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 	}
 	const { site } = await graphQLClientS.request(SBS, { id: process.env.API_SITE })
 	const res = site.categories.find((data: { href: string; }) => data.href === `${category}`)
-
 	const re = res.sections.find((data: { href: string; }) => data.href === `${section}`)
 	return {
 		props: {

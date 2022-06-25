@@ -225,7 +225,7 @@ export const HeadingAdmin:FC<Props> = ({category, section, item}) => {
   const router = useRouter()
   // const {slug, item} = router.query
   // console.log(router.query, slug)
-  return (<nav aria-label="Breadcrumb" className=" py-4 sm:py-6">
+  return (<nav aria-label="Breadcrumb" className=" pt-4 sm:pt-6">
   <ol
     role="list"
     className="max-w-2xl mx-auto px-4 flex items-center space-x-0 sm:px-0 lg:max-w-7xl lg:px-8"

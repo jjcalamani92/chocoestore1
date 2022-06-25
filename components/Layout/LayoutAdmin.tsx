@@ -232,7 +232,7 @@ export const LayoutAdmin: FC<Props> = ({children}) => {
                   // className="cursor-pointer h-full flex items-center text-sm text-orange-600 tracking-normal border-b-2 border-orange-600" 
                   onClick={() => router.push('/admin')}>Productos</li>
                 <li 
-                  className={pathname === '/admin/sites' ? "cursor-pointer h-full flex items-center text-sm text-orange-600 tracking-normal border-b-2 border-orange-600 " : "cursor-pointer h-full flex items-center text-sm text-gry-800 mx-10 tracking-normal"}
+                  className={pathname === '/admin/sites' ? "cursor-pointer h-full flex items-center text-sm text-orange-600 tracking-normal border-b-2 border-orange-600 " : "cursor-pointer h-full flex items-center text-sm text-gry-800 tracking-normal"}
                   onClick={() => router.push('/admin/sites')}>Páginas</li>
                 {/* <li className="cursor-pointer h-full flex items-center text-sm text-gry-800 mr-10 tracking-normal">Performance</li> */}
                 {/* <li className="cursor-pointer h-full flex items-center text-sm text-gray-800 tracking-normal">Deliverables</li> */}
