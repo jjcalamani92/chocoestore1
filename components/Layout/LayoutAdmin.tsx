@@ -111,6 +111,23 @@ export const LayoutAdmin: FC<Props> = ({children}) => {
                     </li>
                   </a>
                 </Link>
+                <Link href='/admin/marks'>
+                  <a>
+                    <li className="text-white pt-8">
+                      <div className="flex items-center">
+                        <div className="md:w-6 md:h-6 w-5 h-5">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none">
+                            <path d="M7.16667 3H3.83333C3.3731 3 3 3.3731 3 3.83333V7.16667C3 7.6269 3.3731 8 3.83333 8H7.16667C7.6269 8 8 7.6269 8 7.16667V3.83333C8 3.3731 7.6269 3 7.16667 3Z" stroke="#667EEA" strokeWidth={1} strokeLinecap="round" strokeLinejoin="round" />
+                            <path d="M7.16667 11.6667H3.83333C3.3731 11.6667 3 12.0398 3 12.5V15.8333C3 16.2936 3.3731 16.6667 3.83333 16.6667H7.16667C7.6269 16.6667 8 16.2936 8 15.8333V12.5C8 12.0398 7.6269 11.6667 7.16667 11.6667Z" stroke="#667EEA" strokeWidth={1} strokeLinecap="round" strokeLinejoin="round" />
+                            <path d="M16.1667 11.6667H12.8333C12.3731 11.6667 12 12.0398 12 12.5V15.8334C12 16.2936 12.3731 16.6667 12.8333 16.6667H16.1667C16.6269 16.6667 17 16.2936 17 15.8334V12.5C17 12.0398 16.6269 11.6667 16.1667 11.6667Z" stroke="#667EEA" strokeWidth={1} strokeLinecap="round" strokeLinejoin="round" />
+                            <path d="M16.1667 3H12.8333C12.3731 3 12 3.3731 12 3.83333V7.16667C12 7.6269 12.3731 8 12.8333 8H16.1667C16.6269 8 17 7.6269 17 7.16667V3.83333C17 3.3731 16.6269 3 16.1667 3Z" stroke="#667EEA" strokeWidth={1} strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                        </div >
+                        <p className={pathname === '/admin/marks' ? "text-orange-500 ml-3 text-lg" : "text-gray-700 ml-3 text-lg"}>Marcas</p>
+                      </div>
+                    </li>
+                  </a>
+                </Link>
                   
 
                   {/* <a>
@@ -228,12 +245,15 @@ export const LayoutAdmin: FC<Props> = ({children}) => {
               </div>
               <ul className="pr-12 xl:flex items-center h-full hidden">
                 <li 
-                  className={pathname === '/admin' ? "cursor-pointer h-full flex items-center text-sm text-orange-600 tracking-normal border-b-2 border-orange-600 " : "cursor-pointer h-full flex items-center text-sm text-gry-800 mr-10 tracking-normal"}
+                  className={pathname === '/admin' ? "cursor-pointer h-full flex items-center text-sm text-orange-600 tracking-normal border-b-2 border-orange-600 mr-10" : "cursor-pointer h-full flex items-center text-sm text-gry-800 mr-10 tracking-normal"}
                   // className="cursor-pointer h-full flex items-center text-sm text-orange-600 tracking-normal border-b-2 border-orange-600" 
                   onClick={() => router.push('/admin')}>Productos</li>
                 <li 
-                  className={pathname === '/admin/sites' ? "cursor-pointer h-full flex items-center  text-sm text-orange-600 tracking-normal border-b-2 border-orange-600 " : "cursor-pointer h-full flex items-center text-sm text-gry-800 tracking-normal ml-10"}
+                  className={pathname === '/admin/sites' ? "cursor-pointer h-full flex items-center mr-10  text-sm text-orange-600 tracking-normal border-b-2 border-orange-600 " : "cursor-pointer h-full flex items-center text-sm mr-10 text-gry-800 tracking-normal"}
                   onClick={() => router.push('/admin/sites')}>Páginas</li>
+                <li 
+                  className={pathname === '/admin/marks' ? "cursor-pointer h-full flex items-center  text-sm text-orange-600 tracking-normal border-b-2 border-orange-600 " : "cursor-pointer h-full flex items-center text-sm text-gry-800 tracking-normal "}
+                  onClick={() => router.push('/admin/marks')}>Marcas</li>
                 {/* <li className="cursor-pointer h-full flex items-center text-sm text-gry-800 mr-10 tracking-normal">Performance</li> */}
                 {/* <li className="cursor-pointer h-full flex items-center text-sm text-gray-800 tracking-normal">Deliverables</li> */}
               </ul>

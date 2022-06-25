@@ -17,3 +17,11 @@ export interface IHardware {
 	status: boolean;
 	site: string;
 }
+
+export interface IMark {
+	_id: string;
+	name: string;
+	href: string;
+	image: string;
+	description: string;
+	}
