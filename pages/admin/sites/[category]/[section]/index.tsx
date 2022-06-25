@@ -8,6 +8,7 @@ import { FormSection } from '../../../../../components/Layout/admin/FormSection'
 import { TableItem } from '../../../../../components/Components/table/TableItem';
 import { useRouter } from 'next/router';
 import { LayoutItemsListAdmin } from '../../../../../components/Components';
+import { HeadingAdmin } from '../../../../../components/Components/HeadingAdmin';
 interface Props {
 	section: Section;
 	category: string
@@ -17,7 +18,7 @@ const ProductPage: NextPage<Props> = ({ section, category }) => {
 	return (
 		<>
 			<LayoutAdmin>
-				
+				<HeadingAdmin category={`${router.query.category}`} section={`${router.query.section}`}/>
 				{
 					router.query.section === 'new'
 					? null

@@ -9,15 +9,17 @@ import { useRouter } from 'next/router';
 import { LayoutFeaturedListAdmin, LayoutSectionListAdmin, LayoutSiteListAdmin } from '../../../../components/Components';
 import { TableFeatured } from '../../../../components/Components/table/TableFeatured';
 import { TableSection } from '../../../../components/Components/table/TableSection';
+import { HeadingAdmin } from '../../../../components/Components/HeadingAdmin';
 interface Props {
 	category: Category;
 }
 const ProductPage: NextPage<Props> = ({ category }) => {
 	const router = useRouter()
-	
+
 	return (
 		<>
 			<LayoutAdmin>
+				<HeadingAdmin/>
 				
 				{
 					router.query.category==='new'
@@ -61,6 +63,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 		const { site } = await graphQLClientS.request(SBS, { id: process.env.API_SITE })
 		data = site.categories.find((data: { href: string; }) => data.href === `${category}` )
 	}
+
 	return {
 		props: {
 			category: data

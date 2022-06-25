@@ -77,49 +77,53 @@ export const SwiperDetail: FC<Props2> = ({ image }) => {
 				className="mb-2"
 			>
 				{image.map((images, i) => (
-					<SwiperSlide className="w-screen" key={i}>
+					<SwiperSlide key={i}>
 						<Image
 							src={`${images}`}
 							width={500}
 							height={500}
 							layout="responsive"
-							objectFit="contain"
+							objectFit="cover"
 							alt=""
 						/>
 						{/* <img src={`${images}`} width="100%" alt="" /> */}
 					</SwiperSlide>
 				))}
 			</Swiper>
-			{image.length === 1 ? (
-				""
-			) : (
-				<Swiper
-					onSwiper={setActiveThumb}
-					slidesPerView={4}
-					spaceBetween={10}
-					loop={true}
-					navigation={false}
-					// thumbs={{swiper:activeThumb}}
-					modules={[Navigation, Pagination, Thumbs]}
-				>
-					{image.map((images, i) => (
-						<SwiperSlide key={i}  >
-							{/* <img src={`${images}`} alt="" /> */}
-							<div className="border">
-								<Image
-									src={`${images}`}
-									width={500}
-									height={500}
-									objectFit="cover"
-									alt=""
-									// className={ `${activeThumb ? 'border border-gray-900' : ''}`}
-									// className="border border-gray-900"
-								/>
-							</div>
-						</SwiperSlide>
-					))}
-				</Swiper>
-			)}
+			{
+				image.length <= 3 
+					? null 
+					: 
+					(
+						<Swiper
+							onSwiper={setActiveThumb}
+							slidesPerView={4}
+							spaceBetween={10}
+							loop={true}
+							navigation={false}
+							// thumbs={{swiper:activeThumb}}
+							modules={[Navigation, Pagination, Thumbs]}
+						>
+							{image.map((images, i) => (
+								<SwiperSlide key={i}  >
+									{/* <img src={`${images}`} alt="" /> */}
+									<div className="border">
+										<Image
+											src={`${images}`}
+											width={500}
+											height={500}
+											layout="responsive"
+											objectFit="cover"
+											alt=""
+											// className={ `${activeThumb ? 'border border-gray-900' : ''}`}
+											// className="border border-gray-900"
+										/>
+									</div>
+								</SwiperSlide>
+							))}
+						</Swiper>
+					)
+			}
 		</div>
 	);
 };

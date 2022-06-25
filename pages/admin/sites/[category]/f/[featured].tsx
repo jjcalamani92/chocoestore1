@@ -4,14 +4,19 @@ import { LayoutAdmin } from '../../../../../components/Layout';
 import { graphQLClientS } from '../../../../../src/graphQLClient';
 import { SBS } from '../../../../../src/gql/siteQuery';
 import { FormFeatured } from '../../../../../components/Layout/admin/FormFeatured';
+import { HeadingAdmin } from '../../../../../components/Components/HeadingAdmin';
+import { useRouter } from 'next/router';
 interface Props {
 	featured: Featured;
 	category: string
 }
 const ProductPage: NextPage<Props> = ({ featured, category }) => {
+	const router = useRouter()
 	return (
 		<>
 			<LayoutAdmin>
+				<HeadingAdmin category={`${router.query.category}`}/>
+
 				<FormFeatured featured={featured} category={category}/>
 			</LayoutAdmin>
 		</>
