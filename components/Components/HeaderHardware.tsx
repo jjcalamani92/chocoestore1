@@ -221,13 +221,13 @@ export const HeaderHardware = () => {
               <div className="ml-4 flex lg:ml-0">
                 <Link href="/">
                   <a >
-                    <span className="sr-only">Workflow</span>
+                    {/* <span className="sr-only">Workflow</span> */}
                     <Image
                       // className="h-8 w-auto"
-                      width={150}
+                      width={120}
                       height={50}
                       src={site.logo}
-                      objectFit={'cover'}
+                      objectFit={'contain'}
                       alt=""
                     />
                   </a>
@@ -277,8 +277,8 @@ export const HeaderHardware = () => {
                                             <Image
                                               src={item.imageSrc}
                                               alt={item.imageAlt}
-                                              width='200'
-                                              height='200'
+                                              width='250'
+                                              height='250'
                                               objectFit={"cover"}
                                               objectPosition={'center'}
                                             />

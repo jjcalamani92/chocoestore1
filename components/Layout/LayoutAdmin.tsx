@@ -210,7 +210,7 @@ export const LayoutAdmin: FC<Props> = ({children}) => {
           </div>
         </div>
         {/* Mobile */}
-        <nav className="w-full mx-auto bg-white shadow">
+        <nav className="w-full mx-auto z-100 bg-white drop-shadow-md ">
           <div className="container px-6 justify-between h-16 flex items-center lg:items-stretch mx-auto">
             <div className="h-full flex items-center">
               <div className="mr-10 flex items-center">
