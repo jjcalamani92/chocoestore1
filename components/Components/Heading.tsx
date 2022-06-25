@@ -73,7 +73,6 @@ export const HeadingDetail:FC<Props> = ({category, section, item, name}) => {
 
 }
 
-
 export const HeadingPrimary:FC<HeadingPrimary> = ({category, section, name, seo, productName, productSlug}) => {
   const router = useRouter()
   const {slug, item} = router.query

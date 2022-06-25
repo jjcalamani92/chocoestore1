@@ -15,12 +15,10 @@ interface Props {
 }
 const ProductPage: NextPage<Props> = ({ category }) => {
 	const router = useRouter()
-
 	return (
 		<>
 			<LayoutAdmin>
-				<HeadingAdmin/>
-				
+				<HeadingAdmin category={`${router.query.category}`}/>
 				{
 					router.query.category==='new'
 					?
