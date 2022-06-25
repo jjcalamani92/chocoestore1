@@ -1,12 +1,9 @@
 import { FC } from "react";
 import { Category, Featured, IHardware, Item, Section } from "../../src/interfaces";
 import Link from "next/link";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPenToSquare, faCircleMinus } from '@fortawesome/free-solid-svg-icons';
 import axios from "axios";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import swal from "sweetalert";
 import Swal from "sweetalert2";
 
 interface Props {
@@ -30,6 +27,7 @@ interface LayoutItemsListAdmin {
 }
 
 export const LayoutProductlist01: FC<Props> = ({ products }) => {
+
 	return (
 		<div className="bg-white">
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -83,8 +81,30 @@ export const LayoutItemListAdmin: FC<Props> = ({ products }) => {
 	const router = useRouter()
 
 	const onDeleteData = async (id: string) => {
-		await axios.delete(`${process.env.APIP_URL}/api/hardware/${id}`)
-		router.reload()
+		Swal.fire({
+			title: 'Está seguro?',
+			text: "No podrás revertir esto!",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Si, bórralo!'
+		}).then( async (result) => {
+			if (result.isConfirmed) {
+				Swal.fire({ 
+						title: 'Eliminado!',
+						text: 'El producto ha sido eliminado.',
+						icon: 'success',
+						timer: 1000,
+						showConfirmButton: false,
+
+					}),
+				// await axios.put(`${process.env.APIS_URL}/api/site/removecategory/${process.env.API_SITE}`, {category: id})
+				await axios.delete(`${process.env.APIP_URL}/api/hardware/${id}`)
+				router.reload()
+			}
+		})
+		// router.reload()
 	}
 	return (
 		<div className="bg-white lg:hidden">
@@ -96,6 +116,9 @@ export const LayoutItemListAdmin: FC<Props> = ({ products }) => {
 
 					<div className="grid grid-cols-2 gap-y-6 gap-x-6 md:grid-cols-4 lg:grid-cols-4">
 						{products.map((product, i) => (
+							<div key={i}>
+
+							<Link href={`/admin/products/${product.slug}`}>
 							<div key={i} className="group">
 								<div className="w-full min-h-80 bg-white aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none relative ">
 								<Image
@@ -108,24 +131,7 @@ export const LayoutItemListAdmin: FC<Props> = ({ products }) => {
 									objectFit="contain"
 								/>
 									
-									<div className="flex justify-end absolute right-1 bottom-1 bg-white rounded pt-1">
-										<Link href={`/admin/products/${product.slug}`} >
-											<a>
-												<FontAwesomeIcon
-													className="text-sm leading-none mx-1 text-gray-600 hover:text-gray-900 rounded focus:outline-none h-5 w-5 "
-													icon={faPenToSquare}
-												/>
-											</a>
-										</Link>
-										<div onClick={() => onDeleteData(product._id)} >
-											<a>
-												<FontAwesomeIcon
-													className="text-sm leading-none mx-1 text-gray-600 hover:text-gray-900 rounded focus:outline-none h-5 w-5"
-													icon={faCircleMinus}
-												/>
-											</a>
-										</div>
-									</div>
+								
 								</div>
 								<div className="mt-4 flex justify-between">
 									<div>
@@ -142,6 +148,9 @@ export const LayoutItemListAdmin: FC<Props> = ({ products }) => {
 								</p> */}
 								</div>
 								
+							</div>
+							</Link>
+							<div onClick={() => onDeleteData(product._id)}  className="mt-4 transition text-center duration-150 ease-in-out hover:bg-orange-600 focus:outline-none border bg-orange-500 rounded text-white px-8 py-2 text-sm">Eliminar</div>
 							</div>
 						))}
 					</div>
