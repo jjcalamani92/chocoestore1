@@ -6,7 +6,7 @@ import { SBS } from '../../../../src/gql/siteQuery';
 import Link from 'next/link';
 import { FormCategory } from '../../../../components/Layout/admin/FormCategory';
 import { useRouter } from 'next/router';
-import { LayoutFeaturedListAdmin, LayoutSectionListAdmin, LayoutSiteListAdmin } from '../../../../components/Components';
+import { LayoutFeaturedListAdmin, LayoutSectionListAdmin, LayoutCategoryListAdmin } from '../../../../components/Components';
 import { TableFeatured } from '../../../../components/Components/table/TableFeatured';
 import { TableSection } from '../../../../components/Components/table/TableSection';
 import { HeadingAdmin } from '../../../../components/Components/HeadingAdmin';

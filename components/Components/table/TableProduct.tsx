@@ -6,6 +6,7 @@ import { IHardware } from "../../../src/interfaces";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faCircleMinus } from '@fortawesome/free-solid-svg-icons';
 import axios from "axios";
+import Swal from "sweetalert2";
 
 interface Props {
   products: IHardware[];
@@ -23,8 +24,30 @@ export const TableProduct: FC<Props> = ({ products }) => {
   // })
   const [show, setShow] = useState(null);
   const onDeleteData = async (id: string) => {
-    await axios.delete(`${process.env.APIP_URL}/api/hardware/${id}`)
-    router.reload()
+    Swal.fire({
+			title: 'Está seguro?',
+			text: "No podrás revertir esto!",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Si, bórralo!'
+		}).then( async (result) => {
+			if (result.isConfirmed) {
+				Swal.fire({ 
+						title: 'Eliminado!',
+						text: 'El producto ha sido eliminado.',
+						icon: 'success',
+						timer: 1000,
+						showConfirmButton: false,
+					}),
+				// await axios.put(`${process.env.APIS_URL}/api/site/removecategory/${process.env.API_SITE}`, {category: id})
+				// await axios.put(`${process.env.APIS_URL}/api/site/removesection/${process.env.API_SITE}`, data)
+        await axios.delete(`${process.env.APIP_URL}/api/hardware/${id}`)
+				router.reload()
+			}
+		})
+    // router.reload()
       // router.replace('/admin')
     // console.log(`delete product with id is: ${_id}`)
     // const updatedTags = getValues('tags').filter(t => t !== tag);

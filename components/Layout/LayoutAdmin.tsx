@@ -4,7 +4,7 @@ import Link from "next/link";
 import { FC, useContext, useState } from "react";
 import { AuthContext, UiContext } from "../../src/context";
 import { Router, useRouter } from 'next/router';
-import { LogoutIcon } from "@heroicons/react/outline";
+import { HomeIcon, LogoutIcon } from "@heroicons/react/outline";
 
 interface Props {}
 
@@ -195,7 +195,7 @@ export const LayoutAdmin: FC<Props> = ({children}) => {
                       <div className="ml-2" onClick={out}>
                         <a className="p-2 text-gray-400 hover:text-gray-500 items-center flex">
                           <span className="sr-only">Logout</span>
-                          <LogoutIcon
+                          <HomeIcon
                             className="w-6 h-6"
                             aria-hidden="true"
                           />
@@ -232,7 +232,7 @@ export const LayoutAdmin: FC<Props> = ({children}) => {
                   // className="cursor-pointer h-full flex items-center text-sm text-orange-600 tracking-normal border-b-2 border-orange-600" 
                   onClick={() => router.push('/admin')}>Productos</li>
                 <li 
-                  className={pathname === '/admin/sites' ? "cursor-pointer h-full flex items-center text-sm text-orange-600 tracking-normal border-b-2 border-orange-600 " : "cursor-pointer h-full flex items-center text-sm text-gry-800 tracking-normal"}
+                  className={pathname === '/admin/sites' ? "cursor-pointer h-full flex items-center  text-sm text-orange-600 tracking-normal border-b-2 border-orange-600 " : "cursor-pointer h-full flex items-center text-sm text-gry-800 tracking-normal ml-10"}
                   onClick={() => router.push('/admin/sites')}>Páginas</li>
                 {/* <li className="cursor-pointer h-full flex items-center text-sm text-gry-800 mr-10 tracking-normal">Performance</li> */}
                 {/* <li className="cursor-pointer h-full flex items-center text-sm text-gray-800 tracking-normal">Deliverables</li> */}
@@ -299,7 +299,7 @@ export const LayoutAdmin: FC<Props> = ({children}) => {
                     <div className="flex ml-2" onClick={out}>
                         <a className="p-2 text-gray-400 hover:text-gray-500 items-center flex">
                           <span className="sr-only">Logout</span>
-                          <LogoutIcon
+                          <HomeIcon
                             className="w-7 h-7"
                             aria-hidden="true"
                           />

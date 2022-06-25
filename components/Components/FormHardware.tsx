@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { ChangeEvent, FC, useEffect, useState } from 'react';
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 import { Category, Item, Section } from "../../src/interfaces";
 
 interface FormData {
@@ -135,10 +136,24 @@ export const FormHardware: FC<Props> = ({ product }) => {
   const onSubmit = async (form: FormData) => {
     const data = { ...form, price: Number(form.price), oldPrice: Number(form.oldPrice), inStock: Number(form.inStock), site: process.env.API_SITE }
     if (form._id) {
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Producto Actualizado',
+        showConfirmButton: false,
+        timer: 1500
+      })
       await axios.put(`${process.env.APIP_URL}/api/hardware/${product._id}`, data)
       router.replace('/admin')
 
     } else {
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Producto Creado',
+        showConfirmButton: false,
+        timer: 1500
+      })
       await axios.post(
         `${process.env.APIP_URL}/api/hardware`, data);
       router.replace(`/admin`)

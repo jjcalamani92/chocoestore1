@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { ChangeEvent, FC, useState } from 'react';
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 import { Category, Featured, Site } from "../../../src/interfaces";
 
 
@@ -32,10 +33,25 @@ export const FormCategory: FC<Props> = ({ category }) => {
   const onSubmit = async (form: FormData) => {
     let { featured, sections, _id, href, category, ...data } = form
     const dat = { ...data, category: form._id }
+    
     if (router.query.category === 'new') {
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Categoría Creada',
+        showConfirmButton: false,
+        timer: 1500
+      })
       await axios.put(`${process.env.APIS_URL}/api/site/addcategory/${process.env.API_SITE}`, data)
       router.replace('/admin/sites')
     } else {
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Categoría Actualizada',
+        showConfirmButton: false,
+        timer: 1500
+      })
       await axios.put(`${process.env.APIS_URL}/api/site/updatecategory/${process.env.API_SITE}`, dat)
       router.replace('/admin/sites')
     }
@@ -174,11 +190,11 @@ export const FormCategory: FC<Props> = ({ category }) => {
                               objectFit="contain"
                             // className="object-center object-cover"
                             />
-                            <FontAwesomeIcon
+                            {/* <FontAwesomeIcon
                               className="text-sm leading-none mx-1 text-gray-600 hover:text-gray-900 rounded focus:outline-none absolute bottom-1 right-1"
                               // onClick={() => onDeleteImage(data)}
                               icon={faCircleMinus}
-                            />
+                            /> */}
                           </div>
                         </div>
                       </div>

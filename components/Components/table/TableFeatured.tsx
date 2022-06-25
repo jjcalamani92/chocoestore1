@@ -6,6 +6,7 @@ import { Category, Featured, IHardware, Section, Site } from "../../../src/inter
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faCircleMinus } from '@fortawesome/free-solid-svg-icons';
 import axios from "axios";
+import Swal from "sweetalert2";
 
 interface Props {
   featured: Featured[];
@@ -19,8 +20,29 @@ export const TableFeatured: FC<Props> = ({ featured, category }) => {
 
   const onDeleteData = async (id: string) => {
     const data = { featured: id, category: category }
-    await axios.put(`${process.env.APIS_URL}/api/site/removefeatured/${process.env.API_SITE}`, data)
-    router.reload()
+    Swal.fire({
+			title: 'Está seguro?',
+			text: "No podrás revertir esto!",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Si, bórralo!'
+		}).then( async (result) => {
+			if (result.isConfirmed) {
+				Swal.fire({ 
+						title: 'Eliminado!',
+						text: 'La sección ha sido eliminado.',
+						icon: 'success',
+						timer: 1000,
+						showConfirmButton: false,
+					}),
+				// await axios.put(`${process.env.APIS_URL}/api/site/removecategory/${process.env.API_SITE}`, {category: id})
+				// await axios.put(`${process.env.APIS_URL}/api/site/removesection/${process.env.API_SITE}`, data)
+        await axios.put(`${process.env.APIS_URL}/api/site/removefeatured/${process.env.API_SITE}`, data)
+				router.reload()
+			}
+		})
   }
   return (
     <>
@@ -31,7 +53,7 @@ export const TableFeatured: FC<Props> = ({ featured, category }) => {
             <div className="my-6 container mx-auto flex flex-row lg:flex-row items-center lg:items-center justify-between ">
               <h4 className="text-2xl font-bold leading-tight text-gray-800">Destacados</h4>
               <Link href={`/admin/sites/${router.query.category}/f/new`}>
-                <a className="transition duration-150 ease-in-out hover:bg-orange-500 focus:outline-none border bg-orange-600 rounded text-white px-8 py-2 text-sm">Nuevo Descatado</a>
+                <a className="transition duration-150 ease-in-out hover:bg-orange-600 focus:outline-none border bg-orange-500 rounded text-white px-8 py-2 text-sm">Nuevo Descatado</a>
               </Link>
             </div>
             <div className="hidden lg:flex">

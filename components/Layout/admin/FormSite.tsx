@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { ChangeEvent, FC, useState } from 'react';
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 
 const validCategory = ['ferreteria', 'linea-automotiva']
 const validSection = ['herramientas-electricas', 'herramientas-manuales', 'para-el-hogar', 'automotiva']
@@ -44,6 +45,13 @@ export const FormSite: FC<Props> = ({ site }) => {
 
   const onSubmit = async (form: FormData) => {
     let { categories, type, ...data } = form
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Datos Actualizados',
+      showConfirmButton: false,
+      timer: 1500
+    })
     await axios.put(`${process.env.APIS_URL}/api/site/${site._id}`, data)
     router.replace('/admin/sites')
   }

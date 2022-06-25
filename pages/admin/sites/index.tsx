@@ -6,7 +6,7 @@ import { S } from "../../../src/gql/siteQuery";
 import { GetStaticProps } from "next";
 import { Category, ISeo, Item, Section, Site } from "../../../src/interfaces";
 import { FormSite } from "../../../components/Layout/admin/FormSite";
-import { LayoutSiteListAdmin } from "../../../components/Components";
+import { LayoutCategoryListAdmin } from "../../../components/Components";
 import { TableCategory } from "../../../components/Components/table/TableCategory";
 
 
@@ -20,7 +20,7 @@ const AdminPages:FC<Props> = ({seo, site}) => {
 		<>
 			<LayoutAdmin>
 				<TableCategory categories={site.categories} />
-				<LayoutSiteListAdmin data={site.categories}/>
+				<LayoutCategoryListAdmin data={site.categories}/>
 				<FormSite site={site} />
 			</LayoutAdmin>
 		</>

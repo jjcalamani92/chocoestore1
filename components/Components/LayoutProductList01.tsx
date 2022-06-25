@@ -6,11 +6,13 @@ import { faPenToSquare, faCircleMinus } from '@fortawesome/free-solid-svg-icons'
 import axios from "axios";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import swal from "sweetalert";
+import Swal from "sweetalert2";
 
 interface Props {
 	products: IHardware[];
 }
-interface LayoutSiteListAdmin {
+interface LayoutCategoryListAdmin {
 	data: Category[] | Section[] | Featured[] | Item[];
 }
 interface LayoutFeaturedListAdmin {
@@ -150,12 +152,31 @@ export const LayoutItemListAdmin: FC<Props> = ({ products }) => {
 };
 
 
-export const LayoutSiteListAdmin: FC<LayoutSiteListAdmin> = ({ data }) => {
+export const LayoutCategoryListAdmin: FC<LayoutCategoryListAdmin> = ({ data }) => {
 	const router = useRouter()
-	// console.log(data)
 	const onDeleteData = async (id: string) => {
-    await axios.put(`${process.env.APIS_URL}/api/site/removecategory/${process.env.API_SITE}`, {category: id})
-    router.reload()
+		Swal.fire({
+			title: 'Está seguro?',
+			text: "No podrás revertir esto!",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Si, bórralo!'
+		}).then( async (result) => {
+			if (result.isConfirmed) {
+				Swal.fire({ 
+						title: 'Eliminado!',
+						text: 'La categoría ha sido eliminado.',
+						icon: 'success',
+						timer: 1000,
+						showConfirmButton: false,
+
+					}),
+				await axios.put(`${process.env.APIS_URL}/api/site/removecategory/${process.env.API_SITE}`, {category: id})
+				router.reload()
+			}
+		})
   }
 	return (
 		<div className="bg-white lg:hidden">
@@ -167,39 +188,25 @@ export const LayoutSiteListAdmin: FC<LayoutSiteListAdmin> = ({ data }) => {
 
 					<div className="grid grid-cols-2 gap-y-6 gap-x-6 md:grid-cols-4 lg:grid-cols-4">
 						{data.map((d, i) => (
-							<div key={i} className="group">
-								<div className="w-full min-h-80 bg-white aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none relative ">
-									<img
-										src={d.imageSrc}
-										alt={d.name}
-										className="w-full h-full object-contain"
-									/>
-									<div className="flex justify-end absolute right-1 bottom-1 bg-white rounded pt-1">
-										<Link href={`/admin/sites/${d.href}`} >
-											<a>
-												<FontAwesomeIcon
-													className="text-sm leading-none mx-1 text-gray-600 hover:text-gray-900 rounded focus:outline-none h-5 w-5 "
-													icon={faPenToSquare}
-												/>
-											</a>
-										</Link>
-										<div onClick={() => onDeleteData(d._id)} >
-											<a>
-												<FontAwesomeIcon
-													className="text-sm leading-none mx-1 text-gray-600 hover:text-gray-900 rounded focus:outline-none h-5 w-5"
-													icon={faCircleMinus}
-												/>
-											</a>
-										</div>
+							<div key={i}>
+
+							<Link  href={`/admin/sites/${d.href}`} className="group">
+								<a>
+									<div className="w-full min-h-80 bg-white aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none relative ">
+										<Image
+											src={d.imageSrc}
+											alt={d.name}
+											width={300}
+											height={300}
+											objectFit={'cover'}
+										/>
+										
 									</div>
-								</div>
-								<div className="mt-4 flex justify-between">
+									<div className="mt-4 flex justify-between">
 									<div>
 										<h3 className="text-sm text-gray-700">
-											<a href="#">
-														<span aria-hidden="true" className="inset-0" />
+											
 														{d.name}
-												</a>
 										</h3>
 										{/* <p className="mt-1 text-sm text-gray-500">{product.color}</p> */}
 									</div>
@@ -207,8 +214,10 @@ export const LayoutSiteListAdmin: FC<LayoutSiteListAdmin> = ({ data }) => {
 									{product.price}.00 Bs
 								</p> */}
 								</div>
-								
-							</div>
+								</a>
+							</Link>
+							<div onClick={() => onDeleteData(d._id)}  className="mt-4 transition text-center duration-150 ease-in-out hover:bg-orange-600 focus:outline-none border bg-orange-500 rounded text-white px-8 py-2 text-sm">Eliminar</div>
+						</div>
 						))}
 					</div>
 				</div>
@@ -220,9 +229,30 @@ export const LayoutSiteListAdmin: FC<LayoutSiteListAdmin> = ({ data }) => {
 export const LayoutSectionListAdmin: FC<LayoutSectionListAdmin> = ({ data, category }) => {
 	const router = useRouter()
   const onDeleteData = async (id: string) => {
-    const data = {section: id, category: category }
-    await axios.put(`${process.env.APIS_URL}/api/site/removesection/${process.env.API_SITE}`, data)
-    router.reload()
+		const data = {section: id, category: category }
+		Swal.fire({
+			title: 'Está seguro?',
+			text: "No podrás revertir esto!",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Si, bórralo!'
+		}).then( async (result) => {
+			if (result.isConfirmed) {
+				Swal.fire({ 
+						title: 'Eliminado!',
+						text: 'La sección ha sido eliminado.',
+						icon: 'success',
+						timer: 1000,
+						showConfirmButton: false,
+					}),
+				// await axios.put(`${process.env.APIS_URL}/api/site/removecategory/${process.env.API_SITE}`, {category: id})
+				await axios.put(`${process.env.APIS_URL}/api/site/removesection/${process.env.API_SITE}`, data)
+				router.reload()
+			}
+		})
+    // router.reload()
   }
 	return (
 		<div className="bg-white lg:hidden">
@@ -234,39 +264,25 @@ export const LayoutSectionListAdmin: FC<LayoutSectionListAdmin> = ({ data, categ
 
 					<div className="grid grid-cols-2 gap-y-6 gap-x-6 md:grid-cols-4 lg:grid-cols-4">
 						{data.map((d, i) => (
-							<div key={i} className="group">
-								<div className="w-full min-h-80 bg-white aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none relative ">
-									<img
+							<div key={i}>
+							<Link  href={`/admin/sites/${router.query.category}/${d.href}`} className="group">
+								<a>
+
+								<div className="w-full min-h-80 bg-white aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none ">
+									<Image
 										src={d.imageSrc}
 										alt={d.name}
-										className="w-full h-full object-contain"
+										width={300}
+										height={300}
+										objectFit={'cover'}
 									/>
-									<div className="flex justify-end absolute right-1 bottom-1 bg-white rounded pt-1">
-									<Link href={`/admin/sites/${router.query.category}/${d.href}`} >
-											<a>
-												<FontAwesomeIcon
-													className="text-sm leading-none mx-1 text-gray-600 hover:text-gray-900 rounded focus:outline-none h-5 w-5 "
-													icon={faPenToSquare}
-												/>
-											</a>
-										</Link>
-										<div onClick={() => onDeleteData(d._id)} >
-											<a>
-												<FontAwesomeIcon
-													className="text-sm leading-none mx-1 text-gray-600 hover:text-gray-900 rounded focus:outline-none h-5 w-5"
-													icon={faCircleMinus}
-												/>
-											</a>
-										</div>
-									</div>
+									
 								</div>
 								<div className="mt-4 flex justify-between">
 									<div>
 										<h3 className="text-sm text-gray-700">
-											<a href="#">
-														<span aria-hidden="true" className="inset-0" />
-														{d.name}
-												</a>
+											<span aria-hidden="true" className="inset-0" />
+											{d.name}
 										</h3>
 										{/* <p className="mt-1 text-sm text-gray-500">{product.color}</p> */}
 									</div>
@@ -274,8 +290,10 @@ export const LayoutSectionListAdmin: FC<LayoutSectionListAdmin> = ({ data, categ
 									{product.price}.00 Bs
 								</p> */}
 								</div>
-								
-							</div>
+								</a>
+							</Link>
+							<div onClick={() => onDeleteData(d._id)}  className="mt-4 transition text-center duration-150 ease-in-out hover:bg-orange-600 focus:outline-none border bg-orange-500 rounded text-white px-8 py-2 text-sm">Eliminar</div>
+						</div>
 						))}
 					</div>
 				</div>
@@ -288,8 +306,30 @@ export const LayoutFeaturedListAdmin: FC<LayoutFeaturedListAdmin> = ({ data, cat
 	const router = useRouter()
   const onDeleteData = async (id: string) => {
     const data = {featured: id, category: category }
-    await axios.put(`${process.env.APIS_URL}/api/site/removefeatured/${process.env.API_SITE}`, data)
-    router.reload()
+		Swal.fire({
+			title: 'Está seguro?',
+			text: "No podrás revertir esto!",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Si, bórralo!'
+		}).then( async (result) => {
+			if (result.isConfirmed) {
+				Swal.fire({ 
+						title: 'Eliminado!',
+						text: 'El destacado ha sido eliminado.',
+						icon: 'success',
+						timer: 1000,
+						showConfirmButton: false,
+					}),
+				// await axios.put(`${process.env.APIS_URL}/api/site/removecategory/${process.env.API_SITE}`, {category: id})
+				// await axios.put(`${process.env.APIS_URL}/api/site/removesection/${process.env.API_SITE}`, data)
+				await axios.put(`${process.env.APIS_URL}/api/site/removefeatured/${process.env.API_SITE}`, data)
+				router.reload()
+			}
+		})
+    // router.reload()
   }
 	return (
 		<div className="bg-white lg:hidden">
@@ -301,39 +341,24 @@ export const LayoutFeaturedListAdmin: FC<LayoutFeaturedListAdmin> = ({ data, cat
 
 					<div className="grid grid-cols-2 gap-y-6 gap-x-6 md:grid-cols-4 lg:grid-cols-4">
 						{data.map((d, i) => (
-							<div key={i} className="group">
+							<div key={i} >
+								<Link href={`/admin/sites/${router.query.category}/f/${d.href}`}>
+								<a className="group">
 								<div className="w-full min-h-80 bg-white aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none relative ">
-									<img
+									<Image
 										src={d.imageSrc}
 										alt={d.name}
-										className="w-full h-full object-contain"
+										width={300}
+										height={300}
+										objectFit={'cover'}
 									/>
-									<div className="flex justify-end absolute right-1 bottom-1 bg-white rounded pt-1">
-									<Link href={`/admin/sites/${router.query.category}/f/${d.href}`} >
-											<a>
-												<FontAwesomeIcon
-													className="text-sm leading-none mx-1 text-gray-600 hover:text-gray-900 rounded focus:outline-none h-5 w-5 "
-													icon={faPenToSquare}
-												/>
-											</a>
-										</Link>
-										<div onClick={() => onDeleteData(d._id)} >
-											<a>
-												<FontAwesomeIcon
-													className="text-sm leading-none mx-1 text-gray-600 hover:text-gray-900 rounded focus:outline-none h-5 w-5"
-													icon={faCircleMinus}
-												/>
-											</a>
-										</div>
-									</div>
+									
 								</div>
 								<div className="mt-4 flex justify-between">
 									<div>
 										<h3 className="text-sm text-gray-700">
-											<a href="#">
-														<span aria-hidden="true" className="inset-0" />
+										
 														{d.name}
-												</a>
 										</h3>
 										{/* <p className="mt-1 text-sm text-gray-500">{product.color}</p> */}
 									</div>
@@ -342,7 +367,11 @@ export const LayoutFeaturedListAdmin: FC<LayoutFeaturedListAdmin> = ({ data, cat
 								</p> */}
 								</div>
 								
+								</a>
+								</Link>
+								<div onClick={() => onDeleteData(d._id)}  className="mt-4 transition text-center duration-150 ease-in-out hover:bg-orange-600 focus:outline-none border bg-orange-500 rounded text-white px-8 py-2 text-sm">Eliminar</div>
 							</div>
+							
 						))}
 					</div>
 				</div>
@@ -354,8 +383,31 @@ export const LayoutItemsListAdmin: FC<LayoutItemsListAdmin> = ({ data, category,
 	const router = useRouter()
   const onDeleteData = async (id: string) => {
     const data = {item: id, category: category, section: section }
-    await axios.put(`${process.env.APIS_URL}/api/site/removeitem/${process.env.API_SITE}`, data)
-    router.reload()
+		Swal.fire({
+			title: 'Está seguro?',
+			text: "No podrás revertir esto!",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Si, bórralo!'
+		}).then( async (result) => {
+			if (result.isConfirmed) {
+				Swal.fire({ 
+						title: 'Eliminado!',
+						text: 'El Item ha sido eliminado.',
+						icon: 'success',
+						timer: 1000,
+						showConfirmButton: false,
+					}),
+				// await axios.put(`${process.env.APIS_URL}/api/site/removecategory/${process.env.API_SITE}`, {category: id})
+				// await axios.put(`${process.env.APIS_URL}/api/site/removesection/${process.env.API_SITE}`, data)
+				// await axios.put(`${process.env.APIS_URL}/api/site/removefeatured/${process.env.API_SITE}`, data)
+				await axios.put(`${process.env.APIS_URL}/api/site/removeitem/${process.env.API_SITE}`, data)
+				router.reload()
+			}
+		})
+    // router.reload()
   }
 	return (
 		<div className="bg-white lg:hidden">
@@ -367,48 +419,36 @@ export const LayoutItemsListAdmin: FC<LayoutItemsListAdmin> = ({ data, category,
 
 					<div className="grid grid-cols-2 gap-y-6 gap-x-6 md:grid-cols-4 lg:grid-cols-4">
 						{data.map((d, i) => (
-							<div key={i} className="group">
-								<div className="w-full min-h-80 bg-white aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none relative ">
-									<img
-										src={d.imageSrc}
-										alt={d.name}
-										className="w-full h-full object-contain"
-									/>
-									<div className="flex justify-end absolute right-1 bottom-1 bg-white rounded pt-1">
-									<Link href={`/admin/sites/${router.query.category}/${router.query.section}/${d.href}`} >
-											<a>
-												<FontAwesomeIcon
-													className="text-sm leading-none mx-1 text-gray-600 hover:text-gray-900 rounded focus:outline-none h-5 w-5 "
-													icon={faPenToSquare}
-												/>
-											</a>
-										</Link>
-										<div onClick={() => onDeleteData(d._id)} >
-											<a>
-												<FontAwesomeIcon
-													className="text-sm leading-none mx-1 text-gray-600 hover:text-gray-900 rounded focus:outline-none h-5 w-5"
-													icon={faCircleMinus}
-												/>
-											</a>
+							<div key={i}>
+								<Link  href={`/admin/sites/${router.query.category}/${router.query.section}/${d.href}`} className="group">
+									<a>
+									<div className="w-full min-h-80 bg-white aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none ">
+										<Image
+											src={d.imageSrc}
+											alt={d.name}
+											width={300}
+											height={300}
+											objectFit={'cover'}
+										/>
+										
+									</div>
+									<div className="mt-4 flex justify-between">
+										<div>
+											<h3 className="text-sm text-gray-700">
+												{d.name}
+											</h3>
+											{/* <p className="mt-1 text-sm text-gray-500">{product.color}</p> */}
 										</div>
+										{/* <p className="text-sm font-medium text-gray-900">
+										{product.price}.00 Bs
+									</p> */}
 									</div>
-								</div>
-								<div className="mt-4 flex justify-between">
-									<div>
-										<h3 className="text-sm text-gray-700">
-											<a href="#">
-														<span aria-hidden="true" className="inset-0" />
-														{d.name}
-												</a>
-										</h3>
-										{/* <p className="mt-1 text-sm text-gray-500">{product.color}</p> */}
-									</div>
-									{/* <p className="text-sm font-medium text-gray-900">
-									{product.price}.00 Bs
-								</p> */}
-								</div>
-								
+									</a>
+									
+								</Link>
+									<div onClick={() => onDeleteData(d._id)}  className="mt-4 transition text-center duration-150 ease-in-out hover:bg-orange-600 focus:outline-none border bg-orange-500 rounded text-white px-8 py-2 text-sm">Eliminar</div>
 							</div>
+
 						))}
 					</div>
 				</div>

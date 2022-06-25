@@ -6,6 +6,7 @@ import { Category, IHardware, Item, Site } from "../../../src/interfaces";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faCircleMinus } from '@fortawesome/free-solid-svg-icons';
 import axios from "axios";
+import Swal from "sweetalert2";
 
 interface Props {
   items: Item[];
@@ -17,18 +18,32 @@ interface Props {
 export const TableItem: FC<Props> = ({ items, category, section }) => {
   const router = useRouter()
 
-  // const [deleteData] = useMutation(DELETE_PRODUCT, {
-  //   onCompleted: (data) => {
-  //     window.location.reload();
-  //   },
-  //   update(cache, result) { },
-  // })
   const [show, setShow] = useState(null);
 
   const onDeleteData = async (id: string) => {
     const data = { item: id, category: category, section: section }
-    await axios.put(`${process.env.APIS_URL}/api/site/removeitem/${process.env.API_SITE}`, data)
-    router.reload()
+    Swal.fire({
+			title: 'Está seguro?',
+			text: "No podrás revertir esto!",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Si, bórralo!'
+		}).then( async (result) => {
+			if (result.isConfirmed) {
+				Swal.fire({ 
+						title: 'Eliminado!',
+						text: 'La sección ha sido eliminado.',
+						icon: 'success',
+						timer: 1000,
+						showConfirmButton: false,
+					}),
+				// await axios.put(`${process.env.APIS_URL}/api/site/removecategory/${process.env.API_SITE}`, {category: id})
+				await axios.put(`${process.env.APIS_URL}/api/site/removeitem/${process.env.API_SITE}`, data)
+				router.reload()
+			}
+		})
   }
   return (
     <>

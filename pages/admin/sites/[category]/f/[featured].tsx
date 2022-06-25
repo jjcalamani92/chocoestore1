@@ -33,7 +33,6 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 			description: '',
 			imageSrc: 'https://res.cloudinary.com/dvcyhn0lj/image/upload/v1655217461/14.1_no-image.jpg_gkwtld.jpg',
 			imageAlt: ''
-
 		}
 	} else {
 		const { site } = await graphQLClientS.request(SBS, { id: process.env.API_SITE })

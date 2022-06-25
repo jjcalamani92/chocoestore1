@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { ChangeEvent, FC, useState } from 'react';
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 import { Category, Featured, Section, Site } from "../../../src/interfaces";
 
 interface FormData {
@@ -33,9 +34,23 @@ export const FormSection: FC<Props> = ({ section, category }) => {
     const da = { ...dat, section: form._id }
 
     if (router.query.section === 'new') {
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Sección Creada',
+        showConfirmButton: false,
+        timer: 1500
+      })
       await axios.put(`${process.env.APIS_URL}/api/site/addsection/${process.env.API_SITE}`, dat)
       router.replace(`/admin/sites/${router.query.category}`)
     } else {
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Sección Actualizada',
+        showConfirmButton: false,
+        timer: 1500
+      })
       await axios.put(`${process.env.APIS_URL}/api/site/updatesection/${process.env.API_SITE}`, da)
       router.replace(`/admin/sites/${router.query.category}`)
     }
@@ -172,11 +187,11 @@ export const FormSection: FC<Props> = ({ section, category }) => {
                               objectFit="contain"
                             // className="object-center object-cover"
                             />
-                            <FontAwesomeIcon
+                            {/* <FontAwesomeIcon
                               className="text-sm leading-none mx-1 text-gray-600 hover:text-gray-900 rounded focus:outline-none absolute bottom-1 right-1"
                               // onClick={() => onDeleteImage(data)}
                               icon={faCircleMinus}
-                            />
+                            /> */}
                           </div>
                         </div>
                       </div>
