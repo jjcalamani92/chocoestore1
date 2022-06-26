@@ -32,8 +32,8 @@ const AdminPages:FC<Props> = ({seo, markAll}) => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const { markAll } = await graphQLClientP.request(MARKS, {site: process.env.API_SITE})
-  const { site } = await graphQLClientS.request(S, {id: process.env.API_SITE})
+  const { markAll } = await graphQLClientP.request(MARKS, {site: process.env.API_SITE, fetchPolicy: 'network-only', onCompleted: () => console.log('called'),})
+  // const { site } = await graphQLClientS.request(S, {id: process.env.API_SITE})
   // console.log( markAll )
   return {
     props: {
