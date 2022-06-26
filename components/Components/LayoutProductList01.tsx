@@ -185,7 +185,7 @@ export const LayoutMarkListAdmin: FC<LayoutMarkListAdmin> = ({ marks }) => {
 
 					}),
 				// await axios.put(`${process.env.APIS_URL}/api/site/removecategory/${process.env.API_SITE}`, {category: id})
-				await axios.delete(`${process.env.APIP_URL}/api/marks/${id}`)
+				await axios.put(`${process.env.APIP_URL}/api/marks/${id}`)
 				router.reload()
 			}
 		})
