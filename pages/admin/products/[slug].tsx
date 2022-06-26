@@ -23,9 +23,21 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 	const { slug = '' } = query
 	let product:IHardware | null | any;
 	if (slug === 'new') {
-		const tempProduct = JSON.parse( JSON.stringify( new Hardware() ) );
-		delete tempProduct._id;
-    product = tempProduct;
+		product = {
+			name: '',
+			brand: '',
+			image: [],
+			description: '',
+			inStock: 0,
+			category:'',
+			section: '',
+			item: '',
+			price: 0,
+			oldPrice: 0,
+			tags: [],
+
+			color: 'como se ve en la imagen',
+		}
 	} else {
 		const data = await client.request(
 			PRODUCT_BY_SLUG, { slug: query.slug, site: process.env.API_SITE }

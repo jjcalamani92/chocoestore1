@@ -401,9 +401,14 @@ export const FormHardware: FC<Props> = ({ product }) => {
                       <input
                         type='number'
                         className="mt-2 focus:ring-orange-500 focus:border-orange-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md p-1"
-                        value={0}
-                        disabled
+                        {...register('oldPrice', {
+                          required: 'Este campo es requerido',
+                          min: { value: 0, message: 'Mínimo de valor cero' }
+                        })}
                       />
+                      <div>
+                        {errors.oldPrice && <span className="text-sm text-orange-500">{errors.oldPrice.message}</span>}
+                      </div>
                     </div>
 
                   </div>

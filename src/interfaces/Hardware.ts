@@ -11,11 +11,12 @@ export interface IHardware {
 	item: string;
 	price: number;
 	oldPrice: number;
-	color: string;
 	tags: string[];
 	client: string;
 	status: boolean;
 	site: string;
+	
+	color: string;
 }
 
 export interface IMark {

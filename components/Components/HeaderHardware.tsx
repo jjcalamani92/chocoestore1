@@ -52,7 +52,6 @@ export const HeaderHardware = () => {
                     <XIcon className="h-6 w-6" aria-hidden="true" />
                   </button>
                 </div>
-
                 {/* Links */}
                 <Tab.Group as="div" className="mt-2">
                   <div className="border-b border-gray-200">
@@ -76,7 +75,7 @@ export const HeaderHardware = () => {
                     {site.categories.map((category) => (
                       <Tab.Panel key={category.name} className="pt-10 pb-8 px-4 space-y-10">
                         <div className="grid grid-cols-2 gap-x-4">
-                          {category.featured.map((item) => (
+                          {category.featured.slice(-2).map((item) => (
                             <div key={item.name} className="group relative text-sm">
                               <div className="aspect-w-1 aspect-h-1 rounded-lg bg-gray-100 overflow-hidden group-hover:opacity-75">
                                 <Image
@@ -271,7 +270,7 @@ export const HeaderHardware = () => {
                                 <div className="max-w-7xl mx-auto px-8">
                                   <div className="grid grid-cols-5 gap-y-10 gap-x-8 py-16">
                                     <div className="col-start-5 grid grid-cols-1 gap-x-8">
-                                      {category.featured.map((item, i) => (
+                                      {category.featured.slice(-1).map((item, i) => (
                                         <div key={i} className="group relative text-base sm:text-sm">
                                           <div className="aspect-w-1 aspect-h-1 rounded-lg bg-gray-100 overflow-hidden group-hover:opacity-75">
                                             <Image
