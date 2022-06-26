@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { ChangeEvent, FC, useEffect, useState } from 'react';
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
-import { Category, Item, Section } from "../../src/interfaces";
+import { Category, IMark, Item, Section } from "../../src/interfaces";
 
 interface FormData {
   _id?: string;
@@ -33,6 +33,9 @@ export const FormHardware: FC<Props> = ({ product }) => {
     defaultValues: { ...product, tags: ['producto'] }
   })
 
+  const [brand, setBrand] = useState([]);
+  const [brandHref, setBrandHref] = useState('');
+
   const [category, setCategory] = useState([]);
   const [categoryHref, setCategoryHref] = useState('');
   const [section, setSection] = useState([]);
@@ -45,12 +48,34 @@ export const FormHardware: FC<Props> = ({ product }) => {
 
   useEffect(() => {
     if (product._id) {
+      
+      setBrandHref(product.brand);
       setCategoryHref(product.category);
       setSectionHref(product.section);
-
     }
   }, [])
 
+  const handleBrand = (event: ChangeEvent<HTMLSelectElement>) => {
+    const getBrandHref = event.target.value;
+    setValue('brand', getBrandHref, {shouldValidate: true})
+    setBrandHref(getBrandHref);
+  }
+
+  useEffect(() => {
+    const getBrand = async () => {
+      const resp = await fetch(`${process.env.APIP_URL}/api/marks`)
+        .then(res => res.json())
+        // .then(data => {
+        //   setBrand(data.filter((d: { site: string; }) => d.site === `${process.env.API_SITE}`))
+        // }
+        // )
+      const res = resp.filter((d: { site: string; }) => d.site === `${process.env.API_SITE}`)
+      const re = res.map((data: { href: IMark; }): IMark => data.href)
+      setBrand(re)
+    }
+    getBrand();
+  }, []);
+  // console.log(brand)
   useEffect(() => {
     const getcategory = async () => {
       fetch(`${process.env.APIS_URL}/api/site/${process.env.API_SITE}`)
@@ -211,8 +236,34 @@ export const FormHardware: FC<Props> = ({ product }) => {
                         {errors.name && <span className="text-sm text-orange-500">{errors.name.message}</span>}
                       </div>
                     </div>
-
+                    
                     <div className="col-span-6 sm:col-span-2">
+                      <label htmlFor="brand" className="block text-sm font-medium text-gray-700">
+                        Marca
+                      </label>
+                      <select
+                        className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm capitalize"
+                        {...register('brand', {
+                          required: 'Este campo es requerido',
+                        })}
+                        onChange={(e) => handleBrand(e) }
+                        value={getValues('brand')}
+                      >
+                        <option value="">--Marcas--</option>
+                        {
+                          brand?.map((data: string, i: number) => (
+                            <option 
+                              className="capitalize" 
+                              key={i} 
+                            >{data}</option>
+                          ))
+                        }
+                      </select>
+                      <div>
+                        {errors.brand && <span className="text-sm text-orange-500">{errors.brand.message}</span>}
+                      </div>
+                    </div>
+                    {/* <div className="col-span-6 sm:col-span-2">
                       <label htmlFor="brand" className="block text-sm font-medium text-gray-700">
                         Marca
                       </label>
@@ -226,7 +277,7 @@ export const FormHardware: FC<Props> = ({ product }) => {
                       <div>
                         {errors.brand && <span className="text-sm text-orange-500">{errors.brand.message}</span>}
                       </div>
-                    </div>
+                    </div> */}
 
 
 

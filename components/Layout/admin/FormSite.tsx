@@ -28,7 +28,6 @@ interface Props {
 }
 
 export const FormSite: FC<Props> = ({ site }) => {
-  console.log(site.description)
   const router = useRouter()
   const { register, handleSubmit, formState: { errors }, getValues, setValue, watch } = useForm<FormData>({
     defaultValues: site

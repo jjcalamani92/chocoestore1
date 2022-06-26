@@ -1,5 +1,4 @@
 import { FC, useState } from "react";
-import Link from 'next/link';
 import { LayoutAdmin } from "../../../components/Layout";
 import { graphQLClientS } from "../../../src/graphQLClient";
 import { S } from "../../../src/gql/siteQuery";
@@ -15,7 +14,6 @@ interface Props {
 	site: Site
 }
 const AdminPages:FC<Props> = ({seo, site}) => {
-	const [page, setPage] = useState(0)
 	return (
 		<>
 			<LayoutAdmin>
