@@ -24,7 +24,7 @@ export interface Site {
   numberPhone: string;
   description: string;
   address: string;
-  location?: string;
+  location: string;
   type: string;
   categories: Category[];
   pages: Page[];
