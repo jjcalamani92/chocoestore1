@@ -19,6 +19,7 @@ interface FormData {
   description: string;
   numberPhone: string;
   address: string;
+  location: string;
   type: string;
   categories?: any;
 }
@@ -173,6 +174,24 @@ export const FormSite: FC<Props> = ({ site }) => {
                         </div>
                         <div>
                           {errors.description && <span className="text-sm text-orange-500">{errors.description.message}</span>}
+                        </div>
+                      </div>
+                      <div>
+                        <label htmlFor="location" className="block text-sm font-medium text-gray-700">
+                          Ubicación del Negocio
+                        </label>
+                        <div className="mt-1">
+                          <textarea
+                            rows={3}
+                            className="shadow-sm focus:ring-orange-500 focus:border-orange-500 my-2 block w-full sm:text-sm border border-gray-300 rounded-md p-1"
+                            {...register('location', {
+                              required: 'Este campo es requerido',
+                              minLength: { value: 2, message: 'Mínimo 3 caracteres' }
+                            })}
+                          />
+                        </div>
+                        <div>
+                          {errors.location && <span className="text-sm text-orange-500">{errors.location.message}</span>}
                         </div>
                       </div>
 
