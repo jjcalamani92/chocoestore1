@@ -1,5 +1,6 @@
 export * from './Home'
 export * from './Layout'
+export * from './Contact'
 export * from './LayoutAdmin'
 export * from './LayoutError'
 export * from './Login'

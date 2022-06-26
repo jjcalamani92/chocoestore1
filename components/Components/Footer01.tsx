@@ -35,16 +35,16 @@ export const Footer01 = () => {
                                 <div className="w-full lg:w-1/2 px-6">
                                     <ul>
                                         <li>
-                                            <Link href="#">
+                                            <Link href="/contacto">
                                                 <a className="text-xs lg:text-sm leading-none hover:text-brand  text-gray-800 ">Contacto</a>
                                             </Link>
                                         </li>
 
-                                        <li className="mt-6">
+                                        {/* <li className="mt-6">
                                             <Link href="#">
                                                 <a className="text-xs lg:text-sm leading-none hover:text-brand  text-gray-800 ">Blog</a>
                                             </Link>
-                                        </li>
+                                        </li> */}
                                         <li className="mt-6">
                                             <Link href="#">
                                                 <a className="text-xs lg:text-sm leading-none hover:text-brand  text-gray-800 ">FAQs</a>
