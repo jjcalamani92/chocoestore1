@@ -18,14 +18,13 @@ interface Props {
 	markAll: IMark[]
 }
 const AdminPages:FC<Props> = ({seo, markAll}) => {
-  // console.log(markAll)
   const { loading, error, data, fetchMore } = useQuery(MARKS, {
 		variables: { site: process.env.API_SITE },  
 		fetchPolicy: 'network-only',
 		onCompleted: () => console.log('called'),
 });
 if (loading) return <Spinner04 />;
-  console.log(data)
+  // console.log(data)
 	return (
 		<>
 			<LayoutAdmin>
