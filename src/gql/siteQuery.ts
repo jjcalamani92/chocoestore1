@@ -1,7 +1,5 @@
 import { gql } from "@apollo/client";
 
-
-
 export const SBS = gql`
 	query Site($id: String!) {
 		site(id: $id) {
@@ -76,6 +74,7 @@ export const S = gql`
 			numberPhone
 			description
 			address
+			location
 			type
 			categories {
 				_id

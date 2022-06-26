@@ -22,6 +22,7 @@ const UI_INITIAL_STATE: UiState = {
 		logo: "https://res.cloudinary.com/dvcyhn0lj/image/upload/v1648919933/Ferreteria/l91xephj1ctcxor7h06d.png",
 		numberPhone: "68175851",
 		address: "av fatima",
+		location: "",
 		description: "av fatima",
 		type: "ecommerce",
 		categories: [],
